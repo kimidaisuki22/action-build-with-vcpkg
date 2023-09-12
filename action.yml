@@ -10,13 +10,16 @@ runs:
          echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
 
     - name: Directly invoke `vcpkg install`
+      shell: bash
       run: |
           vcpkg install
 
     - name: Build project
+      shell: bash
       run: cmake -B build -DCPACK_PACKAGE_DIRECTORY=packages -S . && cmake --build build -j --config ${{ matrix.build_type }}
 
     - name: Package project
+      shell: bash
       run: |
           cd build && cpack
 
